@@ -30,6 +30,7 @@ servWindow::servWindow()
         cout << "SLOTS initialisés. " << endl;
     }
 
+    cout << endl;
     lengthMessage = 0;
 }
 
@@ -45,9 +46,9 @@ void servWindow::newConnexion()
     cout << "Création des signaux asociés..." << endl;
 
     connect(newClient, SIGNAL(readyRead()), this, SLOT(dataReceived()));
-    connect(newClient, SIGNAL(disconnected()), this, SLOT(disconnectedClient()));
+    connect(newClient, SIGNAL(disconnected()), this, SLOT(disconnectClient()));
 
-    cout << "Client connecté." << endl;
+    cout << "Client connecté." << endl << endl;
 }
 
 void    servWindow::dataReceived()
@@ -89,7 +90,7 @@ void    servWindow::dataReceived()
 
     sendToAll(message);
 
-    cout << "message envoyé." << endl;
+    cout << "message envoyé." << endl<< endl;
 
     lengthMessage = 0;
 }
@@ -111,7 +112,7 @@ void    servWindow::disconnectClient()
     cout << "suppression du socket..." << endl;
     socket->deleteLater();
 
-    cout <<"Client déconnecté avec succès." << endl;
+    cout <<"Client déconnecté avec succès." << endl << endl;
 }
 
 void    servWindow::sendToAll(const QString &message)
